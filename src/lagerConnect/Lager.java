@@ -45,13 +45,17 @@ public class Lager {
 			{
 				System.out.println("Connected!!!");
 				Statement smt = conn.createStatement();
-				String sql = "SELECT name FROM testing";
+				String sql = "SELECT * FROM testing";
 				ResultSet rset = smt.executeQuery(sql);
 				String val;
+				int age;
+				int id;
 				while(rset.next())
 				{
 					val = rset.getString("name");
-					System.out.println(val);
+					id = rset.getInt("id");
+					age = rset.getInt("age");
+					System.out.println(val+" age: "+age+" id: "+id);
 				}
 				
 			}
