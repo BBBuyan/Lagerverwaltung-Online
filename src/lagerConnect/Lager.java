@@ -1,6 +1,7 @@
 package lagerConnect;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -19,7 +20,6 @@ public class Lager {
 	public static void main(String [] args)
 	{
 		Lager app = new Lager();
-		app.view.setVisible(true);
 		Regal a = app.data.regals[1];
 		Ware test = new Ware("test", "testsr",2);
 		Ware test2 = new Ware("test2","test2sr",4);
@@ -36,7 +36,6 @@ public class Lager {
 			String username = "C##GDB23013";
 			String pass = "oracle";
 			
-			Statement smt = null;
 			
 			
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());	
@@ -45,10 +44,16 @@ public class Lager {
 			if(conn != null)
 			{
 				System.out.println("Connected!!!");
-				smt = conn.createStatement();
-				String sql = "insert into testing(id, name, age) values (3,'Bato', 21)";
-				smt.execute(sql);
-				System.out.println("sql executed");
+				Statement smt = conn.createStatement();
+				String sql = "SELECT name FROM testing";
+				ResultSet rset = smt.executeQuery(sql);
+				String val;
+				while(rset.next())
+				{
+					val = rset.getString("name");
+					System.out.println(val);
+				}
+				
 			}
 			else
 			{
@@ -67,6 +72,7 @@ public class Lager {
 				if(conn !=null)
 				{
 					conn.close();
+					System.out.println("conn closed");
 				}
 			} catch (SQLException e)
 			{
