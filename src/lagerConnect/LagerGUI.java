@@ -4,12 +4,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class LagerGUI extends JFrame{
 	private LagerData data;
-	private JPanel regalPanel, inhaltPanel, controlPanel, contentPanel;
+	private JPanel regalPanel, inhaltPanel, controlPanel, contentPanel, wahlPanel;
+	private JTextArea namenArea, serienNrArea, groesseArea, messageArea;
+	private JLabel inhaltLabel,messageLabel,serienNrLabel,namenLabel,groesseLabel;
+	private JComboBox<String> comboBox, hochWertBox;
 	
 	public LagerGUI(LagerData d)
 	{
@@ -26,22 +32,23 @@ public class LagerGUI extends JFrame{
 		this.setContentPane(contentPanel);
 		this.pack();
 		
+		//Alles Inhalt
 		inhaltPanel = new JPanel();
 		inhaltPanel.setBounds(400,0,880,720);
-		inhaltPanel.setBackground(Color.yellow);
+		inhaltPanel.setBackground(Color.LIGHT_GRAY);
+		inhaltPanel.setLayout(null);
 		contentPanel.add(inhaltPanel);
 		
+		inhaltLabel = new JLabel("Hier Inhalt");
+		inhaltLabel.setBounds(400,10,200,20);
+		inhaltPanel.add(inhaltLabel);
+		
+		//Alles Regal Panel
 		regalPanel = new JPanel();
 		regalPanel.setBounds(0,0,400,230);
 		regalPanel.setBackground(Color.DARK_GRAY);
 		regalPanel.setLayout(null);
 		contentPanel.add(regalPanel);
-		
-		controlPanel = new JPanel();
-		controlPanel.setBounds(0,230,400,490);
-		controlPanel.setBackground(Color.green.darker().darker());
-		controlPanel.setLayout(null);
-		contentPanel.add(controlPanel);
 		
 		JButton regal1 = new JButton("Regal: 1");
 		regal1.setBounds(30, 30, 150, 20);
@@ -78,6 +85,66 @@ public class LagerGUI extends JFrame{
 		JButton exit = new JButton("Exit");
 		exit.setBounds(245,195,100,20);
 		regalPanel.add(exit);
-	
+		
+		//Alles Wahl Panel
+		wahlPanel = new JPanel();
+		wahlPanel.setBounds(0,230,400,40);
+		wahlPanel.setLayout(null);
+		wahlPanel.setBackground(Color.orange);
+		contentPanel.add(wahlPanel);
+		
+		comboBox = new JComboBox<>(new String[]{"Einlagern", "Auslagern"});
+		comboBox.setBounds(80, 10, 100, 20);
+		wahlPanel.add(comboBox);
+		
+		hochWertBox = new JComboBox<>(new String [] {"Normal", "Hochwertig"});
+		hochWertBox.setBounds(220, 10, 100, 20);
+		wahlPanel.add(hochWertBox);
+		
+		
+		//Alles Control Panel
+		controlPanel = new JPanel();
+		controlPanel.setBounds(0,270,400,450);
+		controlPanel.setBackground(Color.green.darker().darker());
+		controlPanel.setLayout(null);
+		contentPanel.add(controlPanel);
+		
+		namenArea = new JTextArea("");
+		namenArea.setBounds(100, 10, 270, 20);
+		controlPanel.add(namenArea);
+		
+		namenLabel = new JLabel("Name:");
+		namenLabel.setBounds(30, 10, 50, 20);
+		namenLabel.setForeground(Color.white);
+		controlPanel.add(namenLabel);
+		
+		serienNrArea = new JTextArea("");
+		serienNrArea.setBounds(100, 50, 270, 20);
+		controlPanel.add(serienNrArea);
+		
+		serienNrLabel = new JLabel("SerienNr:");
+		serienNrLabel.setBounds(30,50,70,20);
+		serienNrLabel.setForeground(Color.WHITE);
+		controlPanel.add(serienNrLabel);
+		
+		groesseArea = new JTextArea("");
+		groesseArea.setBounds(100, 90, 70, 20);
+		controlPanel.add(groesseArea);
+		
+		groesseLabel = new JLabel("Groesse:");
+		groesseLabel.setBounds(30, 90, 70, 20);
+		groesseLabel.setForeground(Color.white);
+		controlPanel.add(groesseLabel);
+		
+		messageArea = new JTextArea("");
+		messageArea.setBounds(100, 150, 270, 20);
+		controlPanel.add(messageArea);
+		
+		messageLabel = new JLabel("Message:");
+		messageLabel.setBounds(30, 150, 100, 20);
+		messageLabel.setForeground(Color.white);
+		controlPanel.add(messageLabel);
+
+		
 	}
 }
