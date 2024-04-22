@@ -26,8 +26,9 @@ public class Lager {
 		a.getFachat(1, 1).addWare(test);
 		a.getFachat(1, 1).addWare(test2);
 		System.out.println(a.getFachat(1, 1).warenList()+a.getFachat(1, 1).getFreiPlatz());
+		app.view.setVisible(true);
 		
-		
+		/*
 		//SQL Connection Bereich
 		Connection conn = null;
 		try {
@@ -84,7 +85,7 @@ public class Lager {
 			}
 			
 		}
-		
+		*/
 		
 	}
 }

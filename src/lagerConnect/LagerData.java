@@ -11,11 +11,13 @@ public class LagerData {
 		}
 	}
 	
-	public void einlagern(String n, String sr, byte gr)
+	public void einlagern(String n, String sr, int gr)
 	{
 		Ware storing = new Ware(n,sr,gr);
 		bestFit(gr).addWare(storing);
 	}
+	
+	
 	
 	public Fach bestFit(int gr)
 	{
