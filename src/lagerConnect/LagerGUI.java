@@ -82,9 +82,10 @@ public class LagerGUI extends JFrame{
 		regal8.setBounds(220, 150, 150, 20);
 		regalPanel.add(regal8);
 		
-		JButton exit = new JButton("Exit");
-		exit.setBounds(245,195,100,20);
-		regalPanel.add(exit);
+		JButton exitbutton = new JButton("Exit");
+		exitbutton.setBounds(245,195,100,20);
+		regalPanel.add(exitbutton);
+		exitbutton.addActionListener(e->exit());
 		
 		//Alles Wahl Panel
 		wahlPanel = new JPanel();
@@ -145,6 +146,18 @@ public class LagerGUI extends JFrame{
 		messageLabel.setForeground(Color.white);
 		controlPanel.add(messageLabel);
 
+		JButton einlagern = new JButton("Einlagern");
+		einlagern.setBounds(100,250, 100, 20);
+		controlPanel.add(einlagern);
 		
+		JButton auslagern = new JButton("Auslagern");
+		auslagern.setBounds(270,250,100,20);
+		controlPanel.add(auslagern);
 	}
+	
+	public void exit()
+	{
+		System.exit(0);
+	}
+	
 }
