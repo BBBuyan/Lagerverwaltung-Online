@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 public class LagerGUI extends JFrame{
 	private LagerData data;
 	private JPanel regalPanel, inhaltPanel, controlPanel, contentPanel, wahlPanel;
-	private JTextArea namenArea, serienNrArea, groesseArea, messageArea;
+	private JTextArea namenArea, serienNrArea, groesseArea, messageArea, inhaltArea;
 	private JLabel inhaltLabel,messageLabel,serienNrLabel,namenLabel,groesseLabel;
 	private JComboBox<String> comboBox, hochWertBox;
 	
@@ -42,6 +42,10 @@ public class LagerGUI extends JFrame{
 		inhaltLabel = new JLabel("Hier Inhalt");
 		inhaltLabel.setBounds(400,10,200,20);
 		inhaltPanel.add(inhaltLabel);
+		
+		inhaltArea = new JTextArea();
+		inhaltArea.setBounds(40,40,800,500);
+		inhaltPanel.add(inhaltArea);
 		
 		//Alles Regal Panel
 		regalPanel = new JPanel();
@@ -86,6 +90,14 @@ public class LagerGUI extends JFrame{
 		exitbutton.setBounds(245,195,100,20);
 		regalPanel.add(exitbutton);
 		exitbutton.addActionListener(e->exit());
+		regal1.addActionListener(e-> show(0));
+		regal2.addActionListener(e-> show(1));
+		regal3.addActionListener(e-> show(2));
+		regal4.addActionListener(e-> show(3));
+		regal5.addActionListener(e-> show(4));
+		regal6.addActionListener(e-> show(5));
+		regal7.addActionListener(e-> show(6));
+		regal8.addActionListener(e-> show(7));
 		
 		//Alles Wahl Panel
 		wahlPanel = new JPanel();
@@ -146,13 +158,36 @@ public class LagerGUI extends JFrame{
 		messageLabel.setForeground(Color.white);
 		controlPanel.add(messageLabel);
 
-		JButton einlagern = new JButton("Einlagern");
-		einlagern.setBounds(100,250, 100, 20);
-		controlPanel.add(einlagern);
+		JButton einlagernButton = new JButton("Einlagern");
+		einlagernButton.setBounds(100,250, 100, 20);
+		controlPanel.add(einlagernButton);
+		einlagernButton.addActionListener(e->einlagernGUI());
 		
-		JButton auslagern = new JButton("Auslagern");
-		auslagern.setBounds(270,250,100,20);
-		controlPanel.add(auslagern);
+		JButton auslagernButton = new JButton("Auslagern");
+		auslagernButton.setBounds(270,250,100,20);
+		controlPanel.add(auslagernButton);
+//		auslagern.addActionListener();
+	}
+	
+	
+	public void einlagernGUI()
+	{
+		int groesse;
+		String name,sernr;
+		
+		groesse = Integer.parseInt(groesseArea.getText());
+		name = namenArea.getText();
+		sernr = serienNrArea.getText();
+		System.out.println(name+sernr+groesse);
+		
+		int storedRegal =data.bestFitStore(name, sernr, groesse);
+		show(storedRegal);
+	}
+	
+	public void show(int num)
+	{
+		Regal temp = data.regals[num];
+		inhaltArea.setText(temp.getAllWare());
 	}
 	
 	public void exit()

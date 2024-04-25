@@ -17,8 +17,6 @@ public class LagerData {
 		bestFit(gr).addWare(storing);
 	}
 	
-	
-	
 	public Fach bestFit(int gr)
 	{
 		for (Regal r: regals)
@@ -35,5 +33,26 @@ public class LagerData {
 			}
 		}
 		return null;
+	}
+	
+	public int bestFitStore(String n, String sr, int gr)
+	{
+		Ware storing = new Ware (n,sr,gr);
+		int i;
+		for(i = 0; i<8 ; i++)
+		{
+			for(int x = 0; x<10; x++)
+			{
+				for(int y=0; y<10; y++)
+				{
+					if(gr<=regals[i].regalInhalt[x][y].getFreiPlatz())
+					{
+						regals[i].regalInhalt[x][y].addWare(storing);
+						return i;
+					}
+				}
+			}
+		}
+		return i;
 	}
 }

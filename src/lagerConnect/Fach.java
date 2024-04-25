@@ -3,23 +3,23 @@ package lagerConnect;
 import java.util.ArrayList;
 
 public class Fach {
-	private ArrayList <Ware> warenInFach = new ArrayList<>();
+	private ArrayList <Ware> fachInhalt = new ArrayList<>();
 	private byte freiPlatz = 8;
 	
 	public Ware getWarenat(byte i)
 	{
-		return warenInFach.get(i);
+		return fachInhalt.get(i);
 	}
 	
 	public void addWare(Ware saving)
 	{
-		warenInFach.add(saving);
+		fachInhalt.add(saving);
 		freiPlatz -= saving.groesse;
 	}
 	
 	public void removeWare(Ware a)
 	{
-		warenInFach.remove(a);
+		fachInhalt.remove(a);
 		freiPlatz += a.groesse;
 	}
 	
@@ -32,11 +32,18 @@ public class Fach {
 	public String warenList()
 	{
 		String output="";
-		for(Ware w: warenInFach)
+		for(int i = 0; i<fachInhalt.size(); i++)
 		{
-			output += w.name +"| ";
+			output += fachInhalt.get(i).name;
 		}
-		return output;
+		if(output != "")
+		{
+			return output;
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	
