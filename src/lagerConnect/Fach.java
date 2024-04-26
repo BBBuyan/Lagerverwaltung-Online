@@ -34,7 +34,7 @@ public class Fach {
 		String output="";
 		for(int i = 0; i<fachInhalt.size(); i++)
 		{
-			output += fachInhalt.get(i).name;
+			output += fachInhalt.get(i).name +" | ";
 		}
 		if(output != "")
 		{
@@ -44,6 +44,19 @@ public class Fach {
 		{
 			return null;
 		}
+	}
+	
+	public boolean findRemove(String n, String sr)
+	{
+		for(Ware e: fachInhalt)
+		{
+			if(e.name.equals(n))
+			{
+				removeWare(e);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	

@@ -166,22 +166,35 @@ public class LagerGUI extends JFrame{
 		JButton auslagernButton = new JButton("Auslagern");
 		auslagernButton.setBounds(270,250,100,20);
 		controlPanel.add(auslagernButton);
-//		auslagern.addActionListener();
+		auslagernButton.addActionListener(e->auslagernGUI());
 	}
 	
 	
 	public void einlagernGUI()
 	{
-		int groesse;
-		String name,sernr;
+		int groesse = Integer.parseInt(groesseArea.getText());
+		String name = namenArea.getText();
+		String sernr = serienNrArea.getText();
 		
-		groesse = Integer.parseInt(groesseArea.getText());
-		name = namenArea.getText();
-		sernr = serienNrArea.getText();
-		System.out.println(name+sernr+groesse);
+		int storedRegal = data.bestFitStore(name, sernr, groesse);
+		if(storedRegal <8)
+		{
+			show(storedRegal);
+		}
 		
-		int storedRegal =data.bestFitStore(name, sernr, groesse);
-		show(storedRegal);
+	}
+	
+	public void auslagernGUI()
+	{
+		String name = namenArea.getText();
+		String sernr = serienNrArea.getText();
+		
+		int index = data.auslagern(name, sernr);
+		
+		if(index < 8)
+		{
+			show(index);
+		}
 	}
 	
 	public void show(int num)
@@ -189,6 +202,8 @@ public class LagerGUI extends JFrame{
 		Regal temp = data.regals[num];
 		inhaltArea.setText(temp.getAllWare());
 	}
+	
+	
 	
 	public void exit()
 	{
